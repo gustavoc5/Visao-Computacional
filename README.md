@@ -1,72 +1,48 @@
-# This repository is deprecated for at TF-2.0 rewrite visit:
-# https://github.com/oarriaga/paz
-------------------------------------------------
-# Face classification and detection.
-Real-time face detection and emotion/gender classification using fer2013/IMDB datasets with a keras CNN model and openCV.
-* IMDB gender classification test accuracy: 96%.
-* fer2013 emotion classification test accuracy: 66%.
+# Reconhecimento de Emoções Faciais em Tempo Real com CNNs e Transformers
 
-For more information please consult the [publication](https://github.com/oarriaga/face_classification/blob/master/report.pdf)
+Este projeto tem como objetivo detectar emoções faciais em tempo real a partir da webcam, utilizando modelos de aprendizado profundo como **Mini-Xception** e **Swin Transformer**. A aplicação também integra o reconhecimento ao controle de um jogo simples, alterando comportamentos com base na emoção do usuário.
 
-# Emotion/gender examples:
-![alt tag](images/demo_results.png)
+Desenvolvido como parte do projeto final da disciplina de Visão Computacional da UNIFEI (2025).
 
-Guided back-prop
-![alt tag](images/gradcam_results.png)
+---
 
-Real-time demo:
-<div align='center'>
-  <img src='images/color_demo.gif' width='400px'>
-</div>
+## 🎯 Objetivos
 
-[B-IT-BOTS](https://mas-group.inf.h-brs.de/?page_id=622) robotics team :)
-![alt tag](images/robocup_team.png)
+- Detectar rostos em tempo real com OpenCV (Haar Cascade).
+- Classificar emoções faciais utilizando CNNs (Mini-Xception) e Transformers (Swin Transformer).
+- Comparar desempenho entre as arquiteturas.
+- Controlar elementos de um jogo com base na emoção reconhecida.
 
-## Instructions
+---
 
-### Run real-time emotion demo:
-> python3 video_emotion_color_demo.py
+## 📊 Resultados Obtidos
 
-### Run real-time guided back-prop demo:
-> python3 image_gradcam_demo.py
+- **Mini-Xception (FER2013):** ~65% de acurácia.
+- **Swin Transformer (FER2013+):** ~23% após fine-tuning.
+- Mini-Xception se mostrou mais eficiente para aplicações em tempo real com restrição de hardware.
 
-### Make inference on single images:
-> python3 image_emotion_gender_demo.py <image_path>
+---
 
-e.g.
+## 📸 Exemplos de Execução
 
-> python3 image_emotion_gender_demo.py ../images/test_image.jpg
+### Emoções Detectadas
+![exemplo de emoções](images/demo_emotion.png)
 
-### Running with Docker
+### Controle de jogo com emoção facial
+![exemplo do jogo](images/game_demo.png)
 
-With a few steps one can get its own face classification and detection running. Follow the commands below:
+---
 
-* ```docker pull ekholabs/face-classifier```
-* ```docker run -d -p 8084:8084 --name=face-classifier ekholabs/face-classifier```
-* ```curl -v -F image=@[path_to_image]  http://localhost:8084/classifyImage > image.png```
+## ▶️ Como Executar
 
-### To train previous/new models for emotion classification:
+### Requisitos
+- Python 3.8+
+- OpenCV
+- TensorFlow / Keras
+- PyTorch (para o Swin Transformer)
 
+### Rodar a demo em tempo real:
+```bash
+python3 video_emotion_demo.py
 
-* Download the fer2013.tar.gz file from [here](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data)
-
-* Move the downloaded file to the datasets directory inside this repository.
-
-* Untar the file:
-> tar -xzf fer2013.tar
-
-* Run the train_emotion_classification.py file
-> python3 train_emotion_classifier.py
-
-### To train previous/new models for gender classification:
-
-* Download the imdb_crop.tar file from [here](https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/) (It's the 7GB button with the tittle Download faces only).
-
-* Move the downloaded file to the datasets directory inside this repository.
-
-* Untar the file:
-> tar -xfv imdb_crop.tar
-
-* Run the train_gender_classification.py file
-> python3 train_gender_classifier.py
-
+Este repositório é uma adaptação baseada em oarriaga/face_classification, com modificações e extensões desenvolvidas para fins acadêmicos e aplicação prática.
